@@ -1,0 +1,21 @@
+.search-toolbar {
+  padding-left: 0;
+  background-color: transparent;
+}
+
+.search-input {
+  padding-top: 8px;
+  width: 40%;
+}
+
+.search-filter-item {
+  &:hover {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+  }
+}
+
+

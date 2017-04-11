@@ -1,0 +1,80 @@
+@import '~@angular/material/core/theming/all-theme';
+
+.sidenav-container {
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sidenav-container md-sidenav {
+  max-width: 200px;
+}
+
+.sidenav-container .mat-sidenav-content,
+.sidenav-container md-sidenav {
+  display: flex;
+  overflow: visible;
+}
+
+.scrolling-content {
+  overflow-y: scroll;
+  padding: 5px 5px 5px 5px;
+  max-height: calc(100% - 115px);
+  margin-top: 5px;
+}
+
+.sidenav-header {
+    width: 80px;
+    padding-left: 74px;
+}
+
+.title-card {
+  width: 280px;
+  min-height: 280px;
+  max-height: 280px;
+  display: inline-block;
+}
+
+.title-header {
+  background-size: cover;
+}
+
+md-card-content {
+  overflow-y: hidden;
+  max-height: 50px;
+  min-height: 50px;
+}
+
+.custom-scrollbar {
+  &::-webkit-scrollbar-track {
+		   -webkit-box-shadow: none;
+       box-shadow: none;
+	 }
+
+	 &::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+			background-color: map-get($mat-blue-grey, 900);
+	 }
+
+	 &::-webkit-scrollbar-thumb {
+		   background-color: map-get($mat-blue-grey, 400);
+		   background: linear-gradient(map-get($mat-blue-grey, 400), map-get($mat-blue-grey, 500), map-get($mat-blue-grey, 600)); /* Standard syntax */
+		   border-radius: 0;
+	 }
+
+	 &::-webkit-scrollbar-corner {
+		 background-color: rgba(240,240,240,0.1);
+		 border-bottom-right-radius: 10px;
+	 }
+}
+
+.header-loading-bar {
+  max-height: 30px;
+}
+
+.loading {
+  min-height: 50px;
+  padding-top: 50px;
+}
+

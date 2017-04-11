@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<md-toolbar class="search-toolbar">
+  <button md-icon-button (click)="clickMenu()">
+    <md-icon>menu</md-icon>
+  </button>
+  <td-search-input class="search-input"
+    placeholder="Search here"
+    [showUnderline]="true"
+    (search)="search($event)"></td-search-input>
+  <span flex></span>
+  <button md-icon-button><md-icon>filter_list</md-icon></button>
+  <button md-icon-button (click)="toggleView()"><md-icon>{{ viewMode }}</md-icon></button>
+  <button md-icon-button (click)="toggleCollections()"><md-icon color="{{collectionsStatusColor}}">folder_open</md-icon></button>
+  <button md-icon-button [mdMenuTriggerFor]="searchToolbarMenu"><md-icon>more_vert</md-icon></button>
+  <md-menu #searchToolbarMenu="mdMenu">
+    <button md-menu-item>
+      <md-icon>settings</md-icon>
+      <span>Settings</span>
+    </button>
+    <button md-menu-item>
+      <md-icon>exit_to_app</md-icon>
+      <span>Sign out</span>
+    </button>
+  </md-menu>
+</md-toolbar>
+<div class="pad-left-sm pad-right-sm">
+  <md-chip-list class="search-filters">
+    <md-chip class="search-filter-item" *ngFor="let filterItem of searchFilters; let i = index" [selected]="filterItem.selected" [color]="filterItem.color" (click)="toggleSearchFilter(i)">{{filterItem.name}}</md-chip>
+  </md-chip-list>
+</div>
+

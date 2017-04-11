@@ -1,0 +1,83 @@
+@import '~@angular/material/core/theming/all-theme';
+
+$tile-width: 256px;
+$keyframe-heigh: 144px; // 256x144 is 16:9 pixel perfect keyframe aspect ratio
+$header-heigh: 70px;
+$details-heigh: 66px;
+$title-padding: 16px;
+$description-padding: 16px;
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: ' ';
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+md-card {
+  min-width: $tile-width;
+  max-width: $tile-width;
+  min-height: $header-heigh + $keyframe-heigh + $details-heigh + 2 * $description-padding;
+  max-height: $header-heigh + $keyframe-heigh + $details-heigh + 2 * $description-padding;
+  display: inline-block;
+}
+
+md-card-title, md-card-subtitle {
+  width: $tile-width - 2 * $title-padding;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+md-card-header {
+  min-height: $header-heigh;
+  max-height: $header-heigh;
+  margin-bottom: 0;
+}
+
+md-card-content  {
+  overflow: hidden;
+  max-height: $details-heigh;
+  min-height: $details-heigh;
+  padding: 0 0 0 0 !important;
+  margin: $description-padding;
+}
+
+.helper {
+  display: inline-block;
+  height: 100%;
+}
+
+.keyframe-wrapper {
+    height: $keyframe-heigh;
+    width: $tile-width;
+    background-color: map-get($mat-grey, 900);
+    white-space: nowrap;
+    text-align: center;
+}
+
+.keyframe-helper {
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.tile-keyframe {
+    vertical-align: middle;
+    max-height: $keyframe-heigh;
+    max-width: $tile-width;
+
+    @include aspect-ratio(16, 9);
+}

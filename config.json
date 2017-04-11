@@ -1,0 +1,6 @@
+{
+  "system":{
+    "dam_api": "http://localhost:5000/api/",
+    "page_size": 20
+  }
+}
