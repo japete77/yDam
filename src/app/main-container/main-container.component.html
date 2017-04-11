@@ -1,16 +1,14 @@
 <md-sidenav-container class="sidenav-container">
   <md-sidenav #sidenav mode="side" opened="false">
     <md-icon class="md-icon-logo sidenav-header" svgIcon="assets:ydam-logo">yDam</md-icon>
+    <md-list>
+      <md-list-item *ngFor="let item of menuItems" [ngClass]="{ 'mat-list-item-selected': selectedMenu==item.id }">
+        <a [routerLink]="[item.id]" (click)="selectMenu(item.id)">
+          <md-icon [ngClass]="{'tc-grey-200': true}">{{item.icon}}</md-icon>
+          <span class="sidebar-menu-text">{{item.name}}</span>
+        </a>
+      </md-list-item>
+    </md-list>
   </md-sidenav>
-  <app-search-toolbar (clickMenuEvent)="toggleSideNav()" (searchEvent)="searchEvent($event)"></app-search-toolbar>
-  <div class="scrolling-content custom-scrollbar"
-      infinite-scroll
-      [infiniteScrollDistance]="2"
-      [scrollWindow]="false"
-      (scrolled)="onScrollDown()">
-    <app-asset-tile *ngFor="let asset of assets" [asset]="asset"></app-asset-tile>
-    <div class="loading" [hidden]="!loading">
-      <div *tdLoading="'loadingAssets'; mode:'indeterminate'; type:'circle'; strategy:'overlay'; color:'accent'"></div>
-    </div>
-  </div>
+  <router-outlet></router-outlet>
 </md-sidenav-container>

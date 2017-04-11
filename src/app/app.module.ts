@@ -11,12 +11,17 @@ import { TdLoadingService } from '@covalent/core';
 import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ConfigModule, ConfigLoader, ConfigHttpLoader } from '@nglibs/config';
 import { NgTemplate } from 'ng-template';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { SearchToolbarComponent } from './search-toolbar/search-toolbar.component';
 import { MainContainerComponent } from './main-container/main-container.component';
 import { AssetTileComponent } from './asset-tile/asset-tile.component';
-import { AssetService } from './services/asset/asset-service';
+import { AssetService } from './services/asset/asset.service';
+import { LibraryComponent } from './library/library.component';
+import { CommandService } from './services/command/command.service';
+import { ConfigComponent } from './config/config.component';
+import { WorklistComponent } from './worklist/worklist.component';
 
 export function configFactory(http: Http): ConfigLoader {
   return new ConfigHttpLoader(http, '/config.json');
@@ -28,6 +33,9 @@ export function configFactory(http: Http): ConfigLoader {
     SearchToolbarComponent,
     MainContainerComponent,
     AssetTileComponent,
+    LibraryComponent,
+    ConfigComponent,
+    WorklistComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,8 +53,17 @@ export function configFactory(http: Http): ConfigLoader {
       deps: [Http]
     }),
     CovalentDialogsModule,
+    RouterModule.forRoot(
+      [
+        { path: 'library', component: LibraryComponent },
+        { path: 'config', component: ConfigComponent },
+        { path: 'worklist', component: WorklistComponent },
+        { path: '', redirectTo: 'library', pathMatch: 'full' },
+        { path: '**', component: LibraryComponent }
+      ]
+    ),
   ],
-  providers: [ AssetService, TdLoadingService ],
+  providers: [ AssetService, TdLoadingService, CommandService ],
   bootstrap: [ AppComponent ],
 })
 export class AppModule { }

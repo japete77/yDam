@@ -1,4 +1,4 @@
-@import '~@angular/material/core/theming/all-theme';
+@import '../../themes/theme';
 
 .sidenav-container {
   width: 100%;
@@ -45,30 +45,6 @@ md-card-content {
   min-height: 50px;
 }
 
-.custom-scrollbar {
-  &::-webkit-scrollbar-track {
-		   -webkit-box-shadow: none;
-       box-shadow: none;
-	 }
-
-	 &::-webkit-scrollbar {
-			width: 8px;
-			height: 8px;
-			background-color: map-get($mat-blue-grey, 900);
-	 }
-
-	 &::-webkit-scrollbar-thumb {
-		   background-color: map-get($mat-blue-grey, 400);
-		   background: linear-gradient(map-get($mat-blue-grey, 400), map-get($mat-blue-grey, 500), map-get($mat-blue-grey, 600)); /* Standard syntax */
-		   border-radius: 0;
-	 }
-
-	 &::-webkit-scrollbar-corner {
-		 background-color: rgba(240,240,240,0.1);
-		 border-bottom-right-radius: 10px;
-	 }
-}
-
 .header-loading-bar {
   max-height: 30px;
 }
@@ -78,3 +54,24 @@ md-card-content {
   padding-top: 50px;
 }
 
+.mat-list-text {
+  a {
+    text-decoration: none;
+  }
+}
+
+.sidebar-menu-text {
+  position: relative;
+  top: -5px;
+}
+
+.mat-list-item {
+  &:hover {
+    background-color: map-get($mat-blue-grey, 500);
+  }
+}
+
+.mat-list-item-selected {
+  border-left: 4px solid $accent-color;
+  background-color: map-get($mat-blue-grey, 500);
+}

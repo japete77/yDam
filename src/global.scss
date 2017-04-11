@@ -1,0 +1,57 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/core/theming/all-theme';
+
+$header_heigh: 60px;
+
+// Temporary fix
+.td-search-input {
+   height: 71px;
+}
+
+// dark theme styles
+.td-dialog-title {
+  color: map-get($mat-grey, 300);
+}
+
+td-dialog-component {
+  color: map-get($mat-grey, 300);
+}
+
+a {
+  text-decoration: none;
+}
+
+.mat-sidenav-focus-trap {
+  width: 100%;
+}
+
+.custom-scrollbar {
+  &::-webkit-scrollbar-track {
+		   -webkit-box-shadow: none;
+       box-shadow: none;
+	 }
+
+	 &::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+			background-color: map-get($mat-blue-grey, 900);
+	 }
+
+	 &::-webkit-scrollbar-thumb {
+		   background-color: map-get($mat-blue-grey, 400);
+		   background: linear-gradient(map-get($mat-blue-grey, 400), map-get($mat-blue-grey, 500), map-get($mat-blue-grey, 600)); /* Standard syntax */
+		   border-radius: 0;
+	 }
+
+	 &::-webkit-scrollbar-corner {
+		 background-color: rgba(240,240,240,0.1);
+		 border-bottom-right-radius: 10px;
+	 }
+}
+
+.scrolling-content {
+  overflow-y: scroll;
+  padding: 5px 5px 5px 5px;
+  max-height: calc(100% - 115px);
+  margin-top: 5px;
+}

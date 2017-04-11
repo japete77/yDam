@@ -1,0 +1,11 @@
+<app-search-toolbar (clickMenuEvent)="toggleSideNav()" (searchEvent)="searchEvent($event)"></app-search-toolbar>
+<div class="scrolling-content custom-scrollbar"
+    infinite-scroll
+    [infiniteScrollDistance]="2"
+    [scrollWindow]="false"
+    (scrolled)="onScrollDown()">
+  <app-asset-tile *ngFor="let asset of assets" [asset]="asset"></app-asset-tile>
+  <div class="loading" [hidden]="!loading">
+    <div *tdLoading="'loadingAssets'; mode:'indeterminate'; type:'circle'; strategy:'overlay'; color:'accent'"></div>
+  </div>
+</div>
