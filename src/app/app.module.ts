@@ -27,6 +27,7 @@ import { ConfigToolbarComponent } from './config-toolbar/config-toolbar.componen
 import { DataModelerComponent } from './data-modeler/data-modeler.component';
 import { DataModelerTreeComponent } from './data-modeler-tree/data-modeler-tree.component';
 import { ModelsService } from 'app/services/models/models.service';
+import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService } from './translate';
 
 export function configFactory(http: Http): ConfigLoader {
   return new ConfigHttpLoader(http, '/config.json');
@@ -44,6 +45,7 @@ export function configFactory(http: Http): ConfigLoader {
     ConfigToolbarComponent,
     DataModelerComponent,
     DataModelerTreeComponent,
+    TranslatePipe,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,7 @@ export function configFactory(http: Http): ConfigLoader {
     ),
     TreeModule,
   ],
-  providers: [ AssetService, TdLoadingService, CommandService, ModelsService ],
+  providers: [ AssetService, TdLoadingService, CommandService, ModelsService, TRANSLATION_PROVIDERS, TranslateService ],
   bootstrap: [ AppComponent ],
 })
 export class AppModule { }

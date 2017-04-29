@@ -7,11 +7,11 @@
       <form (keydown)="keyDown($event)">
         <div layout="row" layout-margin>
           <md-input-container flex>
-            <input #inputName mdInput [disabled]="node.readonly" placeholder="Name" [(ngModel)]="node.name" name="name">
+            <input #inputName mdInput [disabled]="node.readonly" placeholder="{{ 'Name' | translate}}" [(ngModel)]="node.name" name="name">
           </md-input-container>
         </div>
         <div layout="row" layout-margin>
-          <md-select flex="100" [disabled]="node.readonly" placeholder="Type" [(ngModel)]="node.type" name="type">
+          <md-select flex="100" [disabled]="node.readonly" placeholder="{{ 'Type' | translate }}" [(ngModel)]="node.type" name="type">
             <md-option *ngFor="let type of types" [value]="type">{{type}}</md-option>
           </md-select>
         </div>
@@ -19,21 +19,21 @@
         <div [hidden]="!node || node.type!='string'">
           <div layout="row" layout-margin>
             <md-input-container flex>
-              <input mdInput type="number" [disabled]="node.readonly" placeholder="Minimum Length" [(ngModel)]="node.minLength" name="minLength">
+              <input mdInput type="number" [disabled]="node.readonly" placeholder="{{ 'Minimum Length' | translate }}" [(ngModel)]="node.minLength" name="minLength">
             </md-input-container>
           </div>
           <div layout="row" layout-margin>
             <md-input-container flex>
-              <input mdInput type="number" [disabled]="node.readonly" placeholder="Maximum Length" [(ngModel)]="node.maxLength" name="maxLength">
+              <input mdInput type="number" [disabled]="node.readonly" placeholder="{{ 'Maximum Length' | translate }}" [(ngModel)]="node.maxLength" name="maxLength">
             </md-input-container>
           </div>
           <div layout="row" layout-margin>
             <md-input-container flex>
-              <input mdInput [disabled]="node.readonly" placeholder="Pattern" [(ngModel)]="node.pattern" name="pattern">
+              <input mdInput [disabled]="node.readonly" placeholder="{{ 'Pattern' | translate }}" [(ngModel)]="node.pattern" name="pattern">
             </md-input-container>
           </div>
           <div layout="row" layout-margin>
-            <md-select flex="100" [disabled]="node.readonly" placeholder="Format" [(ngModel)]="node.format" name="format">
+            <md-select flex="100" [disabled]="node.readonly" placeholder="{{ 'Format' | translate }}" [(ngModel)]="node.format" name="format">
               <md-option *ngFor="let format of formats" [value]="format">{{format}}</md-option>
             </md-select>
           </div>
@@ -42,24 +42,24 @@
         <div [hidden]="!node || node.type!='numeric'">
           <div layout="row" layout-margin>
             <md-input-container flex>
-              <input mdInput type="number" [disabled]="node.readonly" placeholder="Multiple Of" [(ngModel)]="node.multipleOf"name="multipleOf">
+              <input mdInput type="number" [disabled]="node.readonly" placeholder="{{ 'Multiple Of' | translate }}" [(ngModel)]="node.multipleOf"name="multipleOf">
             </md-input-container>
           </div>
           <div layout="row" layout-margin>
             <md-input-container flex>
-              <input mdInput type="number" [disabled]="node.readonly" placeholder="Minimum" [(ngModel)]="node.minimum" (change)="minimumChange()" name="minimum">
+              <input mdInput type="number" [disabled]="node.readonly" placeholder="{{ 'Minimum' | translate }}" [(ngModel)]="node.minimum" (change)="minimumChange()" name="minimum">
             </md-input-container>
           </div>
           <div layout="row" layout-margin>
             <md-input-container flex>
-              <input mdInput type="number" [disabled]="node.readonly" placeholder="Maximum" [(ngModel)]="node.maximum" name="maximum">
+              <input mdInput type="number" [disabled]="node.readonly" placeholder="{{ 'Maximum' | translate }}" [(ngModel)]="node.maximum" name="maximum">
             </md-input-container>
           </div>
           <div *ngIf="node && node.minimum" layout="row" layout-margin>
-            <md-checkbox [disabled]="node.readonly" [(ngModel)]="node.exclusiveMinimum" name="exclusiveMinimum">Exclusive Minimum</md-checkbox>
+            <md-checkbox [disabled]="node.readonly" [(ngModel)]="node.exclusiveMinimum" name="exclusiveMinimum">{{ 'Exclusive Minimum' | translate }}</md-checkbox>
           </div>
           <div *ngIf="node && node.maximum" layout="row" layout-margin>
-            <md-checkbox [disabled]="node.readonly" [(ngModel)]="node.exclusiveMaximum" name="exclusiveMaximum">Exclusive Maximum</md-checkbox>
+            <md-checkbox [disabled]="node.readonly" [(ngModel)]="node.exclusiveMaximum" name="exclusiveMaximum">{{ 'Exclusive Maximum' | translate }}</md-checkbox>
           </div>
         </div>
         <!-- object properties -->
@@ -67,55 +67,55 @@
         <div [hidden]="!node || node.type!='array'">
           <div layout="row" layout-margin>
             <md-input-container flex>
-              <input mdInput type="number" [disabled]="node.readonly" placeholder="Minimum Items" [(ngModel)]="node.minimumItems" name="minimumItems">
+              <input mdInput type="number" [disabled]="node.readonly" placeholder="{{ 'Minimum Items' | translate }}" [(ngModel)]="node.minimumItems" name="minimumItems">
             </md-input-container>
           </div>
           <div layout="row" layout-margin>
             <md-input-container flex>
-              <input mdInput type="number" [disabled]="node.readonly" placeholder="Maximum Items" [(ngModel)]="node.maximumItems" name="maximumItems">
+              <input mdInput type="number" [disabled]="node.readonly" placeholder="{{ 'Maximum Items' | translate }}" [(ngModel)]="node.maximumItems" name="maximumItems">
             </md-input-container>
           </div>
           <div layout="row" layout-margin>
-            <md-checkbox [(ngModel)]="node.uniqueness" [disabled]="node.readonly" name="uniqueness">Uniqueness</md-checkbox>
+            <md-checkbox [(ngModel)]="node.uniqueness" [disabled]="node.readonly" name="uniqueness">{{ 'Uniqueness' | translate }}</md-checkbox>
           </div>
         </div>
         <!-- boolean properties -->
         <!-- null properties -->
         <div layout="row" layout-margin>
-          <md-checkbox [(ngModel)]="node.required" [disabled]="node.readonly" name="required">Required</md-checkbox>
+          <md-checkbox [(ngModel)]="node.required" [disabled]="node.readonly" name="required">{{ 'Required' | translate }}</md-checkbox>
         </div>
       </form>
     </div>
   </md-sidenav>
   <md-toolbar>
     <div class="selector-asset-type">
-      <md-select flex="100" placeholder="Asset type" [(ngModel)]="selectedModelType" (change)="changeModelType($event)" name="modelType">
+      <md-select flex="100" placeholder="{{ 'Asset type' | translate }}'" [(ngModel)]="selectedModelType" (change)="changeModelType($event)" name="modelType">
         <md-option *ngFor="let model of models" [value]="model.type">
           {{model.type}}
         </md-option>
       </md-select>
     </div>
-    <button md-raised-button class="text-upper" [disabled]="(node.readonly && node.name!='model') || node.type!='array' && node.type!='object'" (click)="addNode()">add</button>
-    <button md-raised-button class="text-upper" [disabled]="node.readonly" (click)="deleteNode()">delete</button>
-    <button md-raised-button class="text-upper" (click)="saveModels()">save</button>
+    <button md-raised-button class="text-upper" [disabled]="(node.readonly && node.name!='model') || node.type!='array' && node.type!='object'" (click)="addNode()">{{ 'add' | translate }}</button>
+    <button md-raised-button class="text-upper" [disabled]="node.readonly" (click)="deleteNode()">{{ 'delete' | translate }}</button>
+    <button md-raised-button class="text-upper" (click)="saveModels()">{{ 'save' | translate }}</button>
     <span flex></span>
     <button md-icon-button [mdMenuTriggerFor]="treeMoreActionsMenu"><md-icon>more_vert</md-icon></button>
     <md-menu #treeMoreActionsMenu="mdMenu">
       <button md-menu-item (click)="importModel()">
         <md-icon>file_upload</md-icon>
-        <span>Import</span>
+        <span>{{ 'Import' | translate }}</span>
       </button>
       <button md-menu-item (click)="exportModel()">
         <md-icon>file_download</md-icon>
-        <span>Export</span>
+        <span>{{ 'Export' | translate }}</span>
       </button>
       <button md-menu-item (click)="expandNodes()">
         <md-icon>expand_more</md-icon>
-        <span>Expand all</span>
+        <span>{{ 'Expand all' | translate }}</span>
       </button>
       <button md-menu-item (click)="collapseNodes()">
         <md-icon>expand_less</md-icon>
-        <span>Collapse all</span>
+        <span>{{ 'Collapse all' | translate }}</span>
       </button>
     </md-menu>
   </md-toolbar>

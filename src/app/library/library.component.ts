@@ -7,6 +7,7 @@ import { AppConstants } from '../app.constants';
 import { IAsset } from '../models/asset';
 import { AssetService } from '../services/asset/asset.service';
 import { CommandService } from '../services/command/command.service';
+import { TranslateService } from 'app/translate';
 
 @Component({
   templateUrl: './library.component.html',
@@ -25,7 +26,8 @@ export class LibraryComponent implements OnInit {
               private dialogService: TdDialogService,
               private viewContainerRef: ViewContainerRef,
               private loadingService: TdLoadingService,
-              private commandService: CommandService) {
+              private commandService: CommandService,
+              private translateService: TranslateService) {
     this.moreAssets = true;
     this.lastTextSearch = '';
   }
@@ -70,11 +72,11 @@ export class LibraryComponent implements OnInit {
         this.loading = false;
         this.loadingService.resolve(this.loadingAssetsName);
         this.dialogService.openAlert({
-          message: 'Error retriving assets, please check the availability of the asset service API. Review console logs for more details.',
+          message: this.translateService.instant('Error retriving data, please check the availability of the service API. Review console logs for more details.'),
           disableClose: true,
           viewContainerRef: this.viewContainerRef,
-          title: 'Error',
-          closeButton: 'Close',
+          title: this.translateService.instant('Error'),
+          closeButton: this.translateService.instant('Close'),
         });
         console.log(reason);
       });

@@ -8,6 +8,7 @@ import { IMetadataModel } from 'app/models/metadata-model';
 import { TdLoadingService, LoadingType, LoadingMode } from '@covalent/core';
 import { TdDialogService } from '@covalent/core';
 import { ViewContainerRef, ElementRef, HostListener } from '@angular/core';
+import { TranslateService } from "app/translate";
 
 @Component({
   selector: 'app-data-modeler',
@@ -37,7 +38,8 @@ export class DataModelerComponent implements OnInit {
               private loadingService: TdLoadingService,
               private dialogService: TdDialogService,
               private viewContainerRef: ViewContainerRef,
-              private renderer: Renderer) {
+              private renderer: Renderer,
+              private translateService: TranslateService) {
     this.loadingService.create({
       name: this.overlayLoadingId,
       type: LoadingType.Circular,
@@ -103,11 +105,11 @@ export class DataModelerComponent implements OnInit {
       .catch(() => {
         this.loadingService.resolve(this.overlayLoadingId);
         this.dialogService.openAlert({
-          message: 'Error retriving models, please check the availability of the models service API. Review console logs for more details.',
+          message: this.translateService.instant('Error retriving data, please check the availability of the service API. Review console logs for more details.'),
           disableClose: true,
           viewContainerRef: this.viewContainerRef,
-          title: 'Error',
-          closeButton: 'Close',
+          title: this.translateService.instant('Error'),
+          closeButton: this.translateService.instant('Close'),
         });
       });
   }

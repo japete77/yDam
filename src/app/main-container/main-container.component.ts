@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { AppConstants } from '../app.constants';
 import { CommandService } from '../services/command/command.service';
+import { TranslateService } from "app/translate";
 
 @Component({
   selector: 'app-main-container',
@@ -17,28 +18,13 @@ export class MainContainerComponent implements OnInit {
   @ViewChild('sidenav') sidenav;
 
   selectedMenu: string;
-  menuItems: MenuItem[] = [
-    {
-      id: 'library',
-      name: 'Library',
-      icon: 'local_library'
-    },
-    {
-      id: 'worklist',
-      name: 'Worklist',
-      icon: 'playlist_add_check'
-    },
-    {
-      id: 'config',
-      name: 'Configuration',
-      icon: 'build'
-    },
-  ];
+  menuItems: MenuItem[];
 
   constructor(private iconRegistry: MdIconRegistry,
               private domSanitizer: DomSanitizer,
               private commandService: CommandService,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private translateService: TranslateService) {
     this.iconRegistry.addSvgIconInNamespace('assets', 'ydam-logo',
     this.domSanitizer.bypassSecurityTrustResourceUrl('assets/ydam-logo.svg'));
 
@@ -50,6 +36,23 @@ export class MainContainerComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.menuItems = [
+      {
+        id: 'library',
+        name: this.translateService.instant('Library'),
+        icon: 'local_library'
+      },
+      {
+        id: 'worklist',
+        name: this.translateService.instant('Worklist'),
+        icon: 'playlist_add_check'
+      },
+      {
+        id: 'config',
+        name: this.translateService.instant('Configuration'),
+        icon: 'build'
+      },
+    ];
   }
 
   toggleSideNav(): void {

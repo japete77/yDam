@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { SearchFilterItem } from './search-filter-item';
+import { TranslateService } from "app/translate";
 
 @Component({
   selector: 'app-search-toolbar',
@@ -22,7 +23,7 @@ export class SearchToolbarComponent implements OnInit {
 
   private viewModeTypes: string[] = [ 'view_list', 'view_comfy' ];
 
-  constructor() {
+  constructor(private translateService: TranslateService) {
     this.searchFilters = [
       {
         name: 'LoRes',
