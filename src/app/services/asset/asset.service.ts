@@ -16,7 +16,7 @@ export class AssetService {
 
   getAssets(skip: number, text: string): Promise<IAsset[]> {
     let url: string = this.baseUrl +
-      'Asset/Get?MaxResults=' + this.pageSize +
+      'Asset?MaxResults=' + this.pageSize +
       '&Skip=' + skip;
 
     if (text) {

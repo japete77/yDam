@@ -1,0 +1,49 @@
+@import '../../themes/theme';
+
+.sidenav-container {
+  width: 100%;
+  height: calc(100% - 65px);
+}
+
+.sidenav-container md-sidenav {
+  max-width: 400px;
+}
+
+.sidenav-container .mat-sidenav-content,
+.sidenav-container md-sidenav {
+  display: flex;
+  overflow: visible;
+}
+
+.tree-content {
+    max-height: calc(100% - 75px);
+    min-height: calc(100% - 75px);
+}
+
+.properties-content {
+    max-height: calc(100% - 40px);
+    min-height: calc(100% - 40px);
+}
+
+a {
+  &.close-panel {
+    cursor: pointer;
+    top: 5px;
+    position: relative;
+    padding-left: 5px;
+  }
+}
+
+.close-header {
+  height: 30px;
+}
+
+.mat-raised-button {
+  margin: 0 5px 0 5px;
+}
+
+.selector-asset-type {
+  width: 120px;
+  margin-right: 10px;
+  padding-top: 6px;
+}

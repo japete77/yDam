@@ -1,0 +1,10 @@
+<md-toolbar class="search-toolbar">
+  <button md-icon-button (click)="clickMenu()">
+    <md-icon>menu</md-icon>
+  </button>
+</md-toolbar>
+<div class="pad-left-sm pad-right-sm">
+  <md-chip-list class="search-filters">
+    <md-chip class="search-filter-item" *ngFor="let filterItem of searchFilters; let i = index" [selected]="filterItem.selected" [color]="filterItem.color" (click)="toggleSearchFilter(i)">{{filterItem.name}}</md-chip>
+  </md-chip-list>
+</div>

@@ -1,12 +1,12 @@
 @import '~@angular/material/core/theming/all-theme';
 //@import '~@covalent/core/theming/all-theme';
 @include mat-core();
-$primary: mat-palette($mat-orange, 800);
+$primary: mat-palette($mat-orange, 300);
 $accent:  mat-palette($mat-amber, 600, A100, A400);
 $warn:    mat-palette($mat-red, 600);
 $theme:   mat-dark-theme($primary, $accent, $warn);
 
-$primary-color: map-get($mat-orange, 800);
+$primary-color: map-get($mat-orange, 300);
 $accent-color: map-get($mat-amber, 600);
 $warn-color: map-get($mat-red, 600);
 

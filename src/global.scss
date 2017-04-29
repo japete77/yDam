@@ -49,9 +49,44 @@ a {
 	 }
 }
 
+.mat-select-panel {
+    &::-webkit-scrollbar-track {
+		   -webkit-box-shadow: none;
+       box-shadow: none;
+	 }
+
+	 &::-webkit-scrollbar {
+			width: 8px;
+			height: 8px;
+			background-color: map-get($mat-blue-grey, 900);
+	 }
+
+	 &::-webkit-scrollbar-thumb {
+		   background-color: map-get($mat-blue-grey, 400);
+		   background: linear-gradient(map-get($mat-blue-grey, 400), map-get($mat-blue-grey, 500), map-get($mat-blue-grey, 600)); /* Standard syntax */
+		   border-radius: 0;
+	 }
+
+	 &::-webkit-scrollbar-corner {
+		 background-color: rgba(240,240,240,0.1);
+		 border-bottom-right-radius: 10px;
+	 }
+}
+
 .scrolling-content {
   overflow-y: scroll;
   padding: 5px 5px 5px 5px;
-  max-height: calc(100% - 115px);
-  margin-top: 5px;
 }
+
+// .mat-input-container {
+//   height: 45px;
+// }
+
+.mat-option {
+  color: white;
+  background-color: map-get($mat-blue-grey, 600)
+}
+
+// .mat-checkbox {
+//   padding-left: 8px;
+// }

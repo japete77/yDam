@@ -12,6 +12,7 @@ import { InfiniteScrollModule } from 'angular2-infinite-scroll';
 import { ConfigModule, ConfigLoader, ConfigHttpLoader } from '@nglibs/config';
 import { NgTemplate } from 'ng-template';
 import { RouterModule } from '@angular/router';
+import { TreeModule } from 'angular-tree-component';
 
 import { AppComponent } from './app.component';
 import { SearchToolbarComponent } from './search-toolbar/search-toolbar.component';
@@ -22,6 +23,10 @@ import { LibraryComponent } from './library/library.component';
 import { CommandService } from './services/command/command.service';
 import { ConfigComponent } from './config/config.component';
 import { WorklistComponent } from './worklist/worklist.component';
+import { ConfigToolbarComponent } from './config-toolbar/config-toolbar.component';
+import { DataModelerComponent } from './data-modeler/data-modeler.component';
+import { DataModelerTreeComponent } from './data-modeler-tree/data-modeler-tree.component';
+import { ModelsService } from 'app/services/models/models.service';
 
 export function configFactory(http: Http): ConfigLoader {
   return new ConfigHttpLoader(http, '/config.json');
@@ -36,6 +41,9 @@ export function configFactory(http: Http): ConfigLoader {
     LibraryComponent,
     ConfigComponent,
     WorklistComponent,
+    ConfigToolbarComponent,
+    DataModelerComponent,
+    DataModelerTreeComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,8 +70,9 @@ export function configFactory(http: Http): ConfigLoader {
         { path: '**', component: LibraryComponent }
       ]
     ),
+    TreeModule,
   ],
-  providers: [ AssetService, TdLoadingService, CommandService ],
+  providers: [ AssetService, TdLoadingService, CommandService, ModelsService ],
   bootstrap: [ AppComponent ],
 })
 export class AppModule { }

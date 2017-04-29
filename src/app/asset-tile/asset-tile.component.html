@@ -1,10 +1,10 @@
 <md-card>
   <md-card-header>
-    <md-card-title>{{ asset.model.title }}</md-card-title>
-    <md-card-subtitle>{{ asset.model.subtitle }}</md-card-subtitle>
+    <md-card-title>{{ asset.model.Title }}</md-card-title>
+    <md-card-subtitle>{{ asset.model.Genre }}</md-card-subtitle>
   </md-card-header>
   <div class="keyframe-wrapper">
-    <span class="keyframe-helper"></span><img class="tile-keyframe" src="{{ asset.model.keyframe }}" alt="">
+    <span class="keyframe-helper"></span><img class="tile-keyframe" src="{{ asset.model.Poster }}" alt="">
   </div>
-  <md-card-content>{{ asset.model.description }}</md-card-content>
+  <md-card-content>{{ asset.model.Plot }}</md-card-content>
 </md-card>

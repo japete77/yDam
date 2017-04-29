@@ -33,11 +33,6 @@ export class MainContainerComponent implements OnInit {
       name: 'Configuration',
       icon: 'build'
     },
-    // {
-    //   id: 'logout',
-    //   name: 'Logout',
-    //   icon: 'exit_to_app'
-    // }
   ];
 
   constructor(private iconRegistry: MdIconRegistry,
