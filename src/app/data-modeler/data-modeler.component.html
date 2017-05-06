@@ -99,9 +99,10 @@
     <button md-raised-button class="text-upper" [disabled]="node.readonly" (click)="deleteNode()">{{ 'delete' | translate }}</button>
     <button md-raised-button class="text-upper" (click)="saveModels()">{{ 'save' | translate }}</button>
     <span flex></span>
+    <input style="visibility:hidden" #fileInput type="file"  accept=".zip" (change)="importModel()" />
     <button md-icon-button [mdMenuTriggerFor]="treeMoreActionsMenu"><md-icon>more_vert</md-icon></button>
     <md-menu #treeMoreActionsMenu="mdMenu">
-      <button md-menu-item (click)="importModel()">
+      <button md-menu-item (click)="selectModel()">
         <md-icon>file_upload</md-icon>
         <span>{{ 'Import' | translate }}</span>
       </button>

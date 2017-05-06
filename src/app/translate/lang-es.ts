@@ -36,4 +36,5 @@ export const LANG_ES_TRANS = {
     'Close': 'Cerrar',
     'Error retriving data, please check the availability of the service API. Review console logs for more details.':
       'Error recuperando datos, por favor revisa que el acceso al servicio está activo. Comprueba la traza en la consola para obtener más detalles.',
+    'Unsupported Media File': 'Formato de archivo no soportado',
 };

@@ -22,6 +22,7 @@ export class DataModelerComponent implements OnInit {
   @ViewChild('sidenavPropertiesPanel') sidenavPropertiesPanel: MdSidenav;
   @ViewChild('treeComponent') treeComponent: DataModelerTreeComponent;
   @ViewChild('treeContainer') treeContainer: ElementRef;
+  @ViewChild('fileInput') fileInput: ElementRef;
 
   node: IModelNode;
   tree: TreeComponent;
@@ -221,8 +222,30 @@ export class DataModelerComponent implements OnInit {
     this.tree.treeModel.collapseAll();
   }
 
-  importModel() {
+  selectModel() {
+    this.fileInput.nativeElement.click();
+  }
 
+  importModel() {
+    const fi = this.fileInput.nativeElement;
+
+    if (fi.files && fi.files.length > 0) {
+
+      this.loadingService.register(this.overlayLoadingId);
+
+      this.modelsService.saveModels(fi.files[0])
+      .then((result: Response) => {
+
+        this.fileInput.nativeElement.value = '';
+
+        this.loadingService.resolve(this.overlayLoadingId);
+
+        if (!result.ok) {
+          this.showErrorMessage(result.statusText);
+        }
+
+      });
+    }
   }
 
   exportModel() {

@@ -13,7 +13,7 @@ export class ModelsService {
   constructor(private http: Http, private config: ConfigService) { }
 
   getModels(): Promise<IMetadataModel[]> {
-    const url: string = this.baseUrl + 'Models';
+    const url: string = this.baseUrl + 'Models/Get';
 
     return this.http.get(url)
       .toPromise()
@@ -22,13 +22,19 @@ export class ModelsService {
       });
   }
 
-  saveModels(models: IMetadataModel[]): Promise<boolean> {
-    const url: string = this.baseUrl + 'Models';
+  saveModels(modelsFile: any): Promise<Response> {
+    const input = new FormData();
+    input.append('file', modelsFile);
 
-    return this.http.post(url, models)
+    const url: string = this.baseUrl + 'Models/Save';
+
+    return this.http.post(url, input)
       .toPromise()
       .then((response) => {
-        return response.ok;
+        return response;
+      })
+      .catch((reason) => {
+        return reason;
       });
   }
 

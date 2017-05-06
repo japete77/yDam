@@ -36,4 +36,5 @@ export const LANG_EN_TRANS = {
     'Close': 'Close',
     'Error retriving data, please check the availability of the service API. Review console logs for more details.':
       'Error retriving data, please check the availability of the service API. Review console logs for more details.',
+    'Unsupported Media File': 'Unsupported Media File',
 };
