@@ -22,11 +22,25 @@ export class ModelsService {
       });
   }
 
-  saveModels(modelsFile: any): Promise<Response> {
+  saveModels(models: IMetadataModel[]): Promise<Response> {
+
+    const url: string = this.baseUrl + 'Models/Update';
+
+    return this.http.post(url, models)
+      .toPromise()
+      .then((response) => {
+        return response;
+      })
+      .catch((reason) => {
+        return reason;
+      });
+  }
+
+  importModels(modelsFile: any): Promise<Response> {
     const input = new FormData();
     input.append('file', modelsFile);
 
-    const url: string = this.baseUrl + 'Models/Save';
+    const url: string = this.baseUrl + 'Models/Import';
 
     return this.http.post(url, input)
       .toPromise()
@@ -39,7 +53,7 @@ export class ModelsService {
   }
 
   exportModels(): Promise<boolean> {
-    const url: string = this.baseUrl + 'Export';
+    const url: string = this.baseUrl + 'Models/Export';
 
     return this.http.get(url)
       .toPromise()

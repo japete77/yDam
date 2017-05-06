@@ -105,8 +105,6 @@ export class DataModelerComponent implements OnInit {
 
   ngOnInit() {
 
-    this.loadingService.register(this.overlayLoadingId);
-
     this.tree = this.treeComponent.getTree();
 
     this.node = {
@@ -114,14 +112,24 @@ export class DataModelerComponent implements OnInit {
                   type: ''
                 };
 
+    this.refreshModel();
+  }
+
+  refreshModel() {
+
+    this.loadingService.register(this.overlayLoadingId);
+
     this.modelsService.getModels()
       .then((models: IMetadataModel[]) => {
           this.models = models;
+          this.selectedModel = [];
           this.selectedModel.push(this.models[0].asset);
           this.node = this.selectedModel[0];
           this.selectedModelType = this.models[0].type;
-          this.tree.treeModel.update();
-          this.tree.treeModel.expandAll();
+          setTimeout(() => {
+            this.tree.treeModel.update();
+            this.tree.treeModel.expandAll();
+          });
           this.loadingService.resolve(this.overlayLoadingId);
         })
       .catch(() => {
@@ -213,7 +221,6 @@ export class DataModelerComponent implements OnInit {
     }
   }
 
-
   expandNodes() {
     this.tree.treeModel.expandAll();
   }
@@ -233,7 +240,7 @@ export class DataModelerComponent implements OnInit {
 
       this.loadingService.register(this.overlayLoadingId);
 
-      this.modelsService.saveModels(fi.files[0])
+      this.modelsService.importModels(fi.files[0])
       .then((result: Response) => {
 
         this.fileInput.nativeElement.value = '';
@@ -242,6 +249,8 @@ export class DataModelerComponent implements OnInit {
 
         if (!result.ok) {
           this.showErrorMessage(result.statusText);
+        } else {
+          this.refreshModel();
         }
 
       });
@@ -284,8 +293,10 @@ export class DataModelerComponent implements OnInit {
   changeModelType(event: MdSelectChange) {
     this.selectedModel = [];
     this.selectedModel.push(this.getModelByType(event.value));
-    this.tree.treeModel.update();
-    this.tree.treeModel.expandAll();
+    setTimeout(() => {
+      this.tree.treeModel.update();
+      this.tree.treeModel.expandAll();
+    }, 0);
   }
 
   private getModelByType(modelType: string): IModelNode {
