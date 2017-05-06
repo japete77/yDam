@@ -1,4 +1,4 @@
-<tree-root #treeComponent [nodes]="nodes" (onFocus)="focus($event)" (keydown)="keydown($event)">
+<tree-root #treeComponent [nodes]="nodes" (onFocus)="focus($event)">
   <template #treeNodeTemplate let-node="node" let-index="index">
     <span [ngClass]="node.data.type"></span>
     <span class="node-label">{{ node.data.name }}</span>

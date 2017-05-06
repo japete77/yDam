@@ -12,6 +12,6 @@ export class AppComponent implements OnInit {
   constructor(private _translate: TranslateService) { }
 
   ngOnInit() {
-    this._translate.use('es');
+    this._translate.use('en');
   }
 }

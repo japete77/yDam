@@ -87,9 +87,9 @@
       </form>
     </div>
   </md-sidenav>
-  <md-toolbar>
+  <md-toolbar #toolbarModeler>
     <div class="selector-asset-type">
-      <md-select flex="100" placeholder="{{ 'Asset type' | translate }}'" [(ngModel)]="selectedModelType" (change)="changeModelType($event)" name="modelType">
+      <md-select flex="100" placeholder="{{ 'Asset type' | translate }}" [(ngModel)]="selectedModelType" (change)="changeModelType($event)" name="modelType">
         <md-option *ngFor="let model of models" [value]="model.type">
           {{model.type}}
         </md-option>
@@ -119,10 +119,9 @@
       </button>
     </md-menu>
   </md-toolbar>
-  <div class="scrolling-content tree-content custom-scrollbar">
+  <div #treeContainer class="scrolling-content tree-content custom-scrollbar">
     <app-data-modeler-tree #treeComponent [nodes]="selectedModel"
       (focusNode)="focus($event)"
-      (nodesChange)="nodesChange($event)"
-      (treeNodeKeydown)="treeNodeKeydown($event)"></app-data-modeler-tree>
+      (nodesChange)="nodesChange($event)"></app-data-modeler-tree>
   </div>
 </md-sidenav-container>

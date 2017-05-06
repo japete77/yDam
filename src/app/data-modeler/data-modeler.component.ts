@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Renderer } from '@angular/core';
 import { IModelNode } from 'app/models/model-node';
-import { MdSidenav, MdSelectChange, MdInputContainer } from '@angular/material';
+import { MdSidenav, MdSelectChange, MdInputContainer, MdToolbar, MdCheckbox } from '@angular/material';
 import { TreeComponent } from 'angular-tree-component/dist/angular-tree-component';
 import { DataModelerTreeComponent } from 'app/data-modeler-tree/data-modeler-tree.component';
 import { ModelsService } from 'app/services/models/models.service';
@@ -8,7 +8,7 @@ import { IMetadataModel } from 'app/models/metadata-model';
 import { TdLoadingService, LoadingType, LoadingMode } from '@covalent/core';
 import { TdDialogService } from '@covalent/core';
 import { ViewContainerRef, ElementRef, HostListener } from '@angular/core';
-import { TranslateService } from "app/translate";
+import { TranslateService } from 'app/translate';
 
 @Component({
   selector: 'app-data-modeler',
@@ -21,6 +21,7 @@ export class DataModelerComponent implements OnInit {
   @ViewChild('inputName') inputName: any;
   @ViewChild('sidenavPropertiesPanel') sidenavPropertiesPanel: MdSidenav;
   @ViewChild('treeComponent') treeComponent: DataModelerTreeComponent;
+  @ViewChild('treeContainer') treeContainer: ElementRef;
 
   node: IModelNode;
   tree: TreeComponent;
@@ -33,6 +34,7 @@ export class DataModelerComponent implements OnInit {
   selectedModelType: string;
 
   overlayLoadingId = 'overlayModelLoading';
+  offset = 90;
 
   constructor(private modelsService: ModelsService,
               private loadingService: TdLoadingService,
@@ -48,17 +50,36 @@ export class DataModelerComponent implements OnInit {
     });
   }
 
-  // @HostListener('window:keydown', ['$event'])
-  // handleKey(event: KeyboardEvent) {
-  //   if (event.altKey && event.key.toLowerCase() === 'arrowdown') {
-  //     this.tree.treeModel.focusNextNode();
-  //   } else if (event.altKey && event.key.toLowerCase() === 'arrowup') {
-  //     this.tree.treeModel.focusPreviousNode();
-  //   } else if (event.key.toLocaleLowerCase() === 'enter' && this.tree.treeModel.isFocused) {
-  //     this.inputName.nativeElement.focus();
-  //     this.inputName.nativeElement.selectionStart = 0;
-  //   }
-  // }
+  @HostListener('window:keydown', ['$event'])
+  handleKey(event: KeyboardEvent) {
+    // if (event.key.toLocaleLowerCase() === 'enter' && this.tree.treeModel.isFocused) {
+    //   this.inputName.nativeElement.focus();
+    //   this.inputName.nativeElement.selectionStart = 0;
+    // }
+
+    // if (event.key.toLocaleLowerCase() === 'enter') {
+    //   this.tree.treeModel.focusNextNode();
+    //   this.inputName.nativeElement.focus();
+    //   this.inputName.nativeElement.selectionStart = 0;
+    //   event.preventDefault();
+    // }
+
+    // if (event.shiftKey && event.key.toLocaleLowerCase() === 'enter') {
+    //   this.tree.treeModel.focusPreviousNode();
+    //   this.inputName.nativeElement.focus();
+    //   this.inputName.nativeElement.selectionStart = 0;
+    //   event.preventDefault();
+    // }
+
+    // if (event.altKey && event.key.toLowerCase() === 'arrowdown') {
+    //   this.tree.treeModel.focusNextNode();
+    // } else if (event.altKey && event.key.toLowerCase() === 'arrowup') {
+    //   this.tree.treeModel.focusPreviousNode();
+    // } else if (event.key.toLocaleLowerCase() === 'enter' && this.tree.treeModel.isFocused) {
+    //   this.inputName.nativeElement.focus();
+    //   this.inputName.nativeElement.selectionStart = 0;
+    // }
+  }
 
   keyDown(event: KeyboardEvent) {
     // if (event.keyCode === 13) {
@@ -103,18 +124,18 @@ export class DataModelerComponent implements OnInit {
           this.loadingService.resolve(this.overlayLoadingId);
         })
       .catch(() => {
-        this.loadingService.resolve(this.overlayLoadingId);
-        this.dialogService.openAlert({
-          message: this.translateService.instant('Error retriving data, please check the availability of the service API. Review console logs for more details.'),
-          disableClose: true,
-          viewContainerRef: this.viewContainerRef,
-          title: this.translateService.instant('Error'),
-          closeButton: this.translateService.instant('Close'),
-        });
+        this.showErrorMessage(null);
       });
   }
 
   focus(event: any) {
+    // Update scroll acording to focused node
+    if (event.node.position + this.offset > this.treeContainer.nativeElement.scrollTop + this.treeContainer.nativeElement.clientHeight) {
+      this.treeContainer.nativeElement.scrollTop = event.node.position - this.treeContainer.nativeElement.clientHeight + this.offset;
+    } else if (event.node.position < this.treeContainer.nativeElement.scrollTop) {
+      this.treeContainer.nativeElement.scrollTop = event.node.position;
+    }
+
     this.node = event.node.data;
     if (!this.sidenavPropertiesPanel.opened) {
       this.sidenavPropertiesPanel.open();
@@ -205,7 +226,14 @@ export class DataModelerComponent implements OnInit {
   }
 
   exportModel() {
-    this.modelsService.exportModels();
+    this.loadingService.register(this.overlayLoadingId);
+    this.modelsService.exportModels()
+    .then((result) => {
+      this.loadingService.resolve(this.overlayLoadingId);
+      if (!result) {
+        this.showErrorMessage(null);
+      }
+    });
   }
 
   changeName(event: string) {
@@ -246,5 +274,19 @@ export class DataModelerComponent implements OnInit {
       }
     }
     return null;
+  }
+
+  private showErrorMessage(message: string) {
+    if (!message) {
+      message = 'Error retriving data, please check the availability of the service API. Review console logs for more details.';
+    }
+    this.loadingService.resolve(this.overlayLoadingId);
+    this.dialogService.openAlert({
+      message: this.translateService.instant(message),
+      disableClose: true,
+      viewContainerRef: this.viewContainerRef,
+      title: this.translateService.instant('Error'),
+      closeButton: this.translateService.instant('Close'),
+    });
   }
 }

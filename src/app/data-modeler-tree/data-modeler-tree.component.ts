@@ -124,7 +124,6 @@ export class DataModelerTreeComponent implements OnInit {
   @Input() nodes: IModelNode[] = [];
   @Output() nodesChange = new EventEmitter<IModelNode[]>();
   @Output() focusNode = new EventEmitter<any>();
-  @Output() treeNodeKeydown = new EventEmitter<KeyboardEvent>();
 
   focusedNode: IModelNode;
 
@@ -136,10 +135,6 @@ export class DataModelerTreeComponent implements OnInit {
   focus(event: any) {
     this.focusedNode = event.node.data;
     this.focusNode.emit(event);
-  }
-
-  keydown(event: KeyboardEvent) {
-    this.treeNodeKeydown.emit(event);
   }
 
   getTree(): TreeComponent {

@@ -32,16 +32,19 @@ export class ModelsService {
       });
   }
 
-  exportModels() {
+  exportModels(): Promise<boolean> {
     const url: string = this.baseUrl + 'Export';
-    window.open(url, '_self', 'width=1,height=1');
 
-    // return this.http.get(url)
-    //   .toPromise()
-    //   .then((response) => {
-    //     const file = new Blob([response], {type: 'application/octect-stream'});
-    //     const fileURL = URL.createObjectURL(file);
-    //     window.open(url);
-    //   });
+    return this.http.get(url)
+      .toPromise()
+      .then((response) => {
+        const file = new Blob([response], {type: 'application/octect-stream'});
+        const fileURL = URL.createObjectURL(file);
+        window.open(url, '_self', 'width=1,height=1');
+        return true;
+      })
+      .catch((reason) => {
+        return false;
+      });
   }
 }
